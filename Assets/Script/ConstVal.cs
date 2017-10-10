@@ -14,7 +14,7 @@ public static class ConstVal
     public const int START_TARGET_LINK = 5;
     public const int MAX_TARGET_LINK = MAX_BOARD_HEIGHT * MAX_BOARD_WIDTH * MAX_TARGET_LINK_PER_BLOCK;
 
-    public const int START_TIME_SECOND = 10;
+    public const int START_TIME_SECOND = 45;
     public const int CLEAR_ADD_TIME_SECOND = 2;
 
     public const int ADD_DEFAULT_SCORE= 10;
@@ -25,7 +25,9 @@ public static class ConstVal
     public const string EVENT_REFRESH_SCORE = "EVENT_REFRESH_SCORE";
     public const string EVENT_REFRESH_HIGHSCORE = "EVENT_REFRESH_HIGHSCORE";
     public const string EVENT_REFRESH_SECOND = "EVENT_REFRESH_SECOND";
+	public const string EVENT_REFRSH_GAMECENTER_STATE = "EVENT_REFRSH_GAMECENTER_STATE";
 
     //PlayerPrfs Key
     public const string PREFS_KEY_HIGHSCORE = "PREFS_KEY_HIGHSCORE";
+	public const string ACHIEVEMENT_200_KEY = "Achievement_200";
 }

@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     void Start () {
 
-        DestroyBlocks();	
+        DestroyBlocks();
 	}
 
     public void DestroyBlocks()

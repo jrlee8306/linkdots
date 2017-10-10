@@ -13,6 +13,9 @@ public class pnlMain : MonoBehaviour
     public UILabel lblSeconds;
     public UILabel lblGameState;
 
+	public UIButton btnGameCenter;
+	public UILabel lblGameCenterText;
+
     private void Awake()
     {
         EventDelegate.Set(btnStart.onClick , OnClickStart);
@@ -21,6 +24,7 @@ public class pnlMain : MonoBehaviour
         Messenger.AddListener( ConstVal.EVENT_REFRESH_SCORE , SetScore );
         Messenger.AddListener( ConstVal.EVENT_REFRESH_HIGHSCORE , SetHighScore );
         Messenger.AddListener( ConstVal.EVENT_CHANGE_GAME_STATE , SetGameState);
+		Messenger.AddListener( ConstVal.EVENT_REFRSH_GAMECENTER_STATE ,SetGameCenterState );
 
     }
 
@@ -42,6 +46,7 @@ public class pnlMain : MonoBehaviour
         SetHighScore();
         SetSecond();
         SetGameState();
+		SetGameCenterState();
     }
 
     public void SetScore()
@@ -70,6 +75,7 @@ public class pnlMain : MonoBehaviour
             case GameManager.State.Menu:
 
                 btnStart.gameObject.SetActive(true);
+				btnGameCenter.gameObject.SetActive(true);
                 sliderSeconds.gameObject.SetActive(false);
 
                 break;
@@ -77,6 +83,7 @@ public class pnlMain : MonoBehaviour
             case GameManager.State.GamePlay:
 
                 btnStart.gameObject.SetActive(false);
+				btnGameCenter.gameObject.SetActive(false);
                 sliderSeconds.gameObject.SetActive(true);
 
                 break;
@@ -84,14 +91,39 @@ public class pnlMain : MonoBehaviour
             case GameManager.State.GameOver:
 
                 btnStart.gameObject.SetActive(false);
+				btnGameCenter.gameObject.SetActive(false);
                 sliderSeconds.gameObject.SetActive(false);
 
                 break;
         }
     }
 
+	public void SetGameCenterState()
+	{
+		if( GooglePlayServiceManager.instance.IsAuthenticated() == false  ) 
+		{
+			lblGameCenterText.text = "Login";
+
+		}else
+		{
+			lblGameCenterText.text = "ACHIEVEMENTS";
+		}
+	}
+
     public void OnClickStart()
     {
         GameManager.instance.state = GameManager.State.GamePlay;
     }
+
+	public void OnClickGameCenter()
+	{
+		if( GooglePlayServiceManager.instance.IsAuthenticated() == false ) 
+		{
+			GooglePlayServiceManager.instance.Login();
+		}else
+		{
+			GooglePlayServiceManager.instance.ShowAchievementUI();
+		}	
+	}
+
 }

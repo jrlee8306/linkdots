@@ -13,9 +13,11 @@ public static class GameData
         set {
             
             _score = value;
+
             if( _score > highScore )
             {
                 highScore = value;
+				GooglePlayServiceManager.instance.CompleteScore200(value);
             }
 
             Messenger.Broadcast( ConstVal.EVENT_REFRESH_SCORE );
